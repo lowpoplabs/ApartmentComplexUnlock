@@ -12,6 +12,10 @@ The 62 interior apartment rooms (their `TriggerSafeZoneOverride` combat zones) a
 
 Plugin file: [`ApartmentComplexUnlock.cs`](ApartmentComplexUnlock.cs)
 
+<!-- lpl:links -->
+**[Download v1.0.6](https://github.com/lowpoplabs/ApartmentComplexUnlock/releases/latest)** · **Flyer:** [web](https://lowpoplabs.github.io/flyers/RustApartmentUnlock.html) / [PDF](ApartmentComplexUnlock-Flyer.pdf) · **[Changelog](CHANGELOG.md)** · **[Ko-fi](https://ko-fi.com/lowpoplabs)**
+<!-- /lpl:links -->
+
 ## Why deployables instead of "remove building block"
 
 The apartment complex enforces its no-build on the **client**, not the server. We proved this by decompiling the server assembly: after removing every server-side prevent-building volume, `BasePlayer.CanBuild()` returns **true** and the server logs no placement error — but the client still shows red "Cannot build in this area" and never sends the build request. A server-only plugin can't remove client-side monument data, so **normal foundation/wall building can't be enabled plugin-only** (that needs a map edit).
