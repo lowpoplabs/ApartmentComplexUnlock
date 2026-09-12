@@ -1,0 +1,5 @@
+# Local Rust dedicated server install (game files, not project code)
+rust/
+
+# Release zips (never committed)
+releases/
