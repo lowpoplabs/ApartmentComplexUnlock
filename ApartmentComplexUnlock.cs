@@ -11,7 +11,7 @@ using Oxide.Game.Rust.Cui;
 
 namespace Oxide.Plugins
 {
-    [Info("Apartment Complex Unlock", "LowPopLabs", "1.0.6")]
+    [Info("Apartment Complex Unlock", "LowPopLabs", "1.0.7")]
     [Description("Apartment Complex: removes NPC turrets, admin deployable placement, and lets renters furnish their own apartment room (server-side placement with live preview). The outer safe zone stays on unless you turn it off in the config.")]
     public class ApartmentComplexUnlock : RustPlugin
     {
@@ -1868,21 +1868,35 @@ namespace Oxide.Plugins
             Interface.Oxide.DataFileSystem.WriteObject(SpawnedFile, ids);
         }
 
+        // A wipe starts a new save whose net IDs are unrelated to the old ones,
+        // so a saved ID would resolve to some other entity on the new map. Oxide
+        // calls this while the world is created, before OnServerInitialized
+        // reads the file.
+        private void OnNewSave(string filename)
+        {
+            _spawned.Clear();
+            Interface.Oxide.DataFileSystem.WriteObject(SpawnedFile, new List<ulong>());
+        }
+
         private void LoadSpawnedData()
         {
             List<ulong> ids;
             try { ids = Interface.Oxide.DataFileSystem.ReadObject<List<ulong>>(SpawnedFile) ?? new List<ulong>(); }
             catch { ids = new List<ulong>(); }
 
-            int restored = 0;
+            int restored = 0, ignored = 0;
             foreach (var id in ids)
             {
                 var ent = BaseNetworkable.serverEntities.Find(new NetworkableId(id)) as BaseEntity;
                 if (ent == null || ent.IsDestroyed) continue;
+                // Everything this plugin places has an owner; map entities don't.
+                // Also clears IDs left in the file by a wipe before v1.0.7.
+                if (ent.OwnerID == 0) { ignored++; continue; }
                 _spawned.Add(ent);
                 restored++;
             }
             if (restored > 0) Puts($"Restored {restored} plugin-placed entities from the data file.");
+            if (ignored > 0) Puts($"Ignored {ignored} saved ID(s) that now belong to map entities.");
             SaveSpawnedData(); // prune entries that no longer resolve
         }
 

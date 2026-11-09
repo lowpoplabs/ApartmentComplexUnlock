@@ -5,6 +5,11 @@ All notable changes to the Apartment Complex Unlock plugin are documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.7] - 2026-11-09
+
+### Fixed
+- Map wipes no longer make the plugin treat unrelated map entities as its own placements. Saved entity IDs are now cleared when a new save is created, and on load an ID is only accepted if the entity has an owner. Those entities had been made indestructible and could be removed with `/apundeploy`. Entries left over from earlier wipes are dropped automatically on load, and any indestructible map entities return to normal at the next server restart.
+
 ## [1.0.6] - 2026-09-12
 
 First public release on GitHub — no gameplay changes.
