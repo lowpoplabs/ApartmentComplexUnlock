@@ -13,7 +13,7 @@ The 62 interior apartment rooms (their `TriggerSafeZoneOverride` combat zones) a
 Plugin file: [`ApartmentComplexUnlock.cs`](ApartmentComplexUnlock.cs)
 
 <!-- lpl:links -->
-**[Download v1.0.6](https://github.com/lowpoplabs/ApartmentComplexUnlock/releases/latest)** · **Flyer:** [web](https://lowpoplabs.github.io/flyers/RustApartmentUnlock.html) / [PDF](ApartmentComplexUnlock-Flyer.pdf) · **[Changelog](CHANGELOG.md)** · **[Ko-fi](https://ko-fi.com/lowpoplabs)**
+**[Download v1.0.7](https://github.com/lowpoplabs/ApartmentComplexUnlock/releases/latest)** · **Flyer:** [web](https://lowpoplabs.github.io/flyers/RustApartmentUnlock.html) / [PDF](ApartmentComplexUnlock-Flyer.pdf) · **[Changelog](CHANGELOG.md)** · **[Ko-fi](https://ko-fi.com/lowpoplabs)**
 <!-- /lpl:links -->
 
 ## Why deployables instead of "remove building block"
